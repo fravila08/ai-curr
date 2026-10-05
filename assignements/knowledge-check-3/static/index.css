@@ -1,0 +1,169 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #1c2333;
+  --muted: #5b6478;
+  --border: #d9deea;
+  --accent: #3b5bdb;
+  --accent-text: #ffffff;
+  --good: #1b7f3b;
+  --good-bg: #e3f6e9;
+  --bad: #b42318;
+  --bad-bg: #fde8e6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12151c;
+    --card: #1b202b;
+    --text: #e8ebf3;
+    --muted: #9aa3b8;
+    --border: #2f3646;
+    --accent: #7c93ff;
+    --accent-text: #10131a;
+    --good: #5fd48a;
+    --good-bg: #16301f;
+    --bad: #ff8b7f;
+    --bad-bg: #3a1c19;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.app-header h1 { margin: 0; font-size: 1.75rem; }
+.subtitle { margin: 4px 0 24px; color: var(--muted); }
+.lead { color: var(--muted); }
+
+.screen {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.screen[hidden] { display: none; }
+
+/* Menu */
+.quiz-list { display: grid; gap: 12px; margin-top: 16px; }
+.quiz-card {
+  text-align: left;
+  width: 100%;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.quiz-card:hover { border-color: var(--accent); }
+.quiz-card strong { display: block; font-size: 1.05rem; }
+.quiz-card span { color: var(--muted); font-size: 0.925rem; }
+
+/* Status + progress */
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.quiz-title { font-weight: 600; color: var(--text); }
+.progress {
+  height: 6px;
+  margin: 10px 0 20px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-bar { height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease; }
+
+/* Question */
+.question { margin: 0 0 16px; font-size: 1.2rem; }
+.options { display: grid; gap: 10px; }
+.option {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg);
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.option:hover:not(:disabled) { border-color: var(--accent); }
+.option:disabled { cursor: default; }
+.option .mark { font-weight: 700; min-width: 1.2em; }
+.option.correct { border-color: var(--good); background: var(--good-bg); }
+.option.wrong { border-color: var(--bad); background: var(--bad-bg); }
+
+/* Feedback */
+.feedback {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+}
+.feedback[hidden] { display: none; }
+.feedback.correct { border-left-color: var(--good); background: var(--good-bg); }
+.feedback.wrong { border-left-color: var(--bad); background: var(--bad-bg); }
+.feedback-title { margin: 0 0 6px; font-weight: 700; }
+.feedback.correct .feedback-title { color: var(--good); }
+.feedback.wrong .feedback-title { color: var(--bad); }
+.feedback p { margin: 0 0 12px; }
+
+/* Buttons */
+.btn {
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* Results */
+.final-score { font-size: 2.5rem; font-weight: 800; margin: 8px 0; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.review { margin-top: 24px; }
+.review-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.review-list li {
+  padding: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.review-list .q { font-weight: 600; margin: 0 0 6px; }
+.review-list p { margin: 4px 0; }
+.review-list .yours { color: var(--bad); }
+.review-list .right { color: var(--good); }
+
+@media (max-width: 480px) {
+  .screen { padding: 16px; }
+  .final-score { font-size: 2rem; }
+}
